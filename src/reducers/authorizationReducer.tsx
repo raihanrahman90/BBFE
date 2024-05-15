@@ -1,26 +1,26 @@
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { AUTHENTICATED, NOT_AUTHENTICATED } from "../action/actionTypes";
 
-const initialState = {
-    authChecked: false,
-    loggedIn: false,
-    currentUser: {}
-};
+interface AuthState {
+    token: string,
+    email:string,
+    name:string
+}
 
-export default function authorization(state = initialState, action:any) {
-    switch (action.type) {
-        case AUTHENTICATED:
-            return {
-                authChecked: true,
-                loggedIn: true,
-                currentUser: action.payload,
-            };
-        case NOT_AUTHENTICATED:
-            return {
-                authChecked: true,
-                loggedIn: false,
-                currentUser: {}
-            };
-        default:
-            return state;
-    }
-} 
+const initialState = {}
+
+const authSlice = createSlice({
+    name: 'user',
+    initialState,
+    reducers: {
+      logout(state) {
+        state = initialState;
+      },
+      setToken(state, action: PayloadAction<AuthState>) {
+        state = action.payload
+      },
+    },
+  })
+
+export const { logout, setToken} = authSlice.actions;
+export default authSlice.reducer;

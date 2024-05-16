@@ -1,104 +1,42 @@
-:root{
-  --primary:#ffbe76;
-  --secondary:#f0932b;
-  --white: #fff;
-  --gray: #9b9b9b;
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
 }
 
-.full-container{
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
 }
-.vertical-center{
-  align-items: center;
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-.login-container{
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  height: 60%;
-  width: 60%;
-  max-width: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0px 100px;
-}
-@media (max-width: 640px) {
-  .login-container{
-    padding: 0px 10%;
-    height: 50%;
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 
-.form__group {
-  position: relative;
-  padding: 15px 0 0;
-  margin-top: 10px;
-  width: 100%;
-}
-
-.form__field {
-  font-family: inherit;
-  width: 100%;
-  border: 0;
-  border-bottom: 2px solid var(--gray);
-  outline: 0;
-  font-size: 1.3rem;
-  padding: 7px 0;
-  background: transparent;
-  transition: border-color 0.2s;
-
-  &::placeholder {
-    color: transparent;
-  }
-
-  &:placeholder-shown ~ .form__label {
-    font-size: 1.3rem;
-    cursor: text;
-    top: 20px;
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
   }
 }
 
-.form__label {
-  position: absolute;
-  top: 0;
-  display: block;
-  transition: 0.2s;
-  font-size: 1rem;
-  color: var(--gray);
+.card {
+  padding: 2em;
 }
 
-.form__field:focus {
-  padding-bottom: 6px;  
-  font-weight: 700;
-  border-width: 3px;
-  border-image: linear-gradient(to right, var(--primary),var(--secondary));
-  border-image-slice: 1;
-}
-.form__field:focus .form__label {
-  position: absolute;
-  top: 0;
-  display: block;
-  transition: 0.2s;
-  font-size: 1rem;
-  color: var(--primary);
-  font-weight:700;    
-}
-/* reset input */
-.form__field{
-  &:required,&:invalid { box-shadow:none; }
-}
-
-.button-primary{
-  background: var(--primary);
-  padding: 10px 20px;
-  color:var(--white);
-  margin: 10px;
-}
-
-.full-width{
-  width: 100%;
+.read-the-docs {
+  color: #888;
 }

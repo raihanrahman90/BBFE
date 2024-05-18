@@ -1,10 +1,94 @@
 #admin-container{
-    
+    flex-direction: row;
+    display: flex;
+    background-color: $third-color;
+    content{
+        padding: 30px;
+        background-color: $third-color;
+        height: 90vh;
+    }
+}
+
+.admin-card{
+    box-shadow: $box-shadow;
+    width: fit-content;
+    height: fit-content;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    background-color: $white;
+    border-radius: 15px;
+    overflow: hidden;
+    .title{
+        font-weight: 600;
+    }
+}
+
+.admin-table{
+    box-shadow: $box-shadow;
+    margin: 25px 0px;
+    padding: 1.5rem;
+    border-collapse: collapse;
+    th{
+        font-weight: bolder;
+        text-align: left;
+        font-size: 0.8rem;
+        border-top: 1px solid $line-color;
+        border-bottom: 1px solid $line-color;
+        padding: 10px 0px;
+    }
+    td, th{
+        padding: 10px 10px;
+    }
+
+    tr{
+        border-bottom: 1px solid $line-color;
+    }
+}
+
+#admin-header{
+    height: 10vh;
+    width: 100%;
+    background-color: $third-color;
+    padding: 10px 40px;
+}
+
+@media screen and (max-width:$mobile) {
+    #admin-header{
+        display: none;
+    }
 }
 
 #admin-sidebar{
-    float: left;
-    height: 100vh;
+    height: 95vh;
     width: 220px;
-    background-color: $primary-color;
+    padding: 10vh 20px;
+    background-color: $white;
+    margin:2.5vh 15px;
+    box-shadow: $box-shadow;
+    border-radius: 10px;
+
+    .menu{
+        color: $text-color;
+        text-align: left;
+        width: 100%;
+        display: block;
+        text-decoration: none;
+        padding: 5px 32px;
+        margin:10px 0px;
+        border-radius: 3px;
+    }
+    .menu.active{
+        background-color: red;
+    }
+    .menu:hover{
+        background-color: white;
+        box-shadow: $box-shadow;
+    }
+}
+
+@media screen and (max-width:$mobile) {
+    #admin-sidebar{
+        display: none;
+    }
 }

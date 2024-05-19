@@ -8,3 +8,9 @@
     background-color: $primary-color;
     color: $text-color;
 }
+.btn-icon{
+    display: flex;
+    align-items: center;
+    height: 35px;
+    font-family: $poppins;
+}

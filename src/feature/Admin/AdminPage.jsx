@@ -1,8 +1,10 @@
-import { Link, NavLink, Route, Routes } from "react-router-dom";
+import { NavLink, Route, Routes } from "react-router-dom";
 import AdminDashboardPage from "./AdminDashboard/AdminDashboardPage";
 import { useSelector } from "react-redux";
 import AdminProdukPage from "./AdminProduk/AdminProdukPage";
-
+import { MdDashboard } from "react-icons/md";
+import { IoShirtOutline } from "react-icons/io5";
+import { FaRegUser } from "react-icons/fa";
 
 const AdminPage = () =>{
     return (
@@ -12,7 +14,7 @@ const AdminPage = () =>{
                 <AdminHeader/>
                 <Routes>
                     <Route path="" element={<AdminDashboardPage/>} />
-                    <Route path="produk/:id" element={<AdminProdukPage/>}/>
+                    <Route path="produk" element={<AdminProdukPage/>}/>
                 </Routes>
             </div>
         </div>
@@ -22,9 +24,9 @@ const AdminPage = () =>{
 const AdminSidebar = () =>{
     return (
         <div id="admin-sidebar">
-            <NavLink end to="/admin" className="menu" activeClassName="active" >Dashboard</NavLink>
-            <NavLink to="/admin/produk" className="menu" activeClassName="active">Produk</NavLink>
-            <NavLink to="/admin/user" className="menu" activeClassName="active">User</NavLink>
+            <NavLink end to="/admin" className="menu"><MdDashboard /> Dashboard</NavLink>
+            <NavLink to="/admin/produk" className="menu"><IoShirtOutline /> Produk</NavLink>
+            <NavLink to="/admin/user" className="menu"><FaRegUser /> User</NavLink>
         </div>
     )
 }
@@ -34,9 +36,16 @@ const AdminHeader = () => {
     const {user} = useSelector((state)=>state.auth);
     
     return (
-        <div id="admin-header">
-            <h2>Welcome, {user.name}</h2>
-        </div>
+        <>
+            <div id="admin-header">
+                <h2>Welcome, {user?.name}</h2>
+            </div>
+            <div id="admin-header-mobile">
+                <div className="admin-header-card">
+                    <button className="burger-menu">burger</button>
+                </div>
+            </div>
+        </>
     )
 }
 export default AdminPage;

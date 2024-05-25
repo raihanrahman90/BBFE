@@ -32,6 +32,7 @@
         display: flex;
         justify-content: right;
         justify-items: center;
+        padding:10px 0px;
     }
     .admin-card-content{
         height: 100%;
@@ -111,6 +112,7 @@
     margin:2.5vh 15px;
     box-shadow: $box-shadow;
     border-radius: 10px;
+    padding: 50px 20px;
 
     .menu{
         color: $text-color;

@@ -11,7 +11,7 @@ const defaultRequest = axios.create({
 });
 
 const refreshToken = async()=>{
-    return defaultRequest.get('auth/refresh')
+    return defaultRequest.get(`auth/refresh?refresh_token=${localStorage.getItem("refreshToken")}`)
     .then((response)=>{
         localStorage.setItem(response.data.access_token);
     });
@@ -35,4 +35,12 @@ const requestWithToken=(method, url, body)=>{
 
 export const getAPI=async(url)=>{
     return requestWithToken("get", url, {});
+}
+
+export const putAPI = async(url, data)=>{
+    return requestWithToken("put", url, data);
+}
+
+export const postAPI=async(url, data)=>{
+    return requestWithToken("post", url, data);
 }

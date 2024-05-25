@@ -5,6 +5,7 @@ import AdminProdukPage from "./AdminProduk/AdminProdukPage";
 import { MdDashboard } from "react-icons/md";
 import { IoShirtOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa";
+import AdminProdukPageAdd from "./AdminProdukAdd/AdminProdukAddPage";
 
 const AdminPage = () =>{
     return (
@@ -15,6 +16,7 @@ const AdminPage = () =>{
                 <Routes>
                     <Route path="" element={<AdminDashboardPage/>} />
                     <Route path="produk" element={<AdminProdukPage/>}/>
+                    <Route path="produk/add" element={<AdminProdukPageAdd/>}/>
                 </Routes>
             </div>
         </div>

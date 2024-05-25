@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getListPage } from "./AdminProdukService";
+import { getListPage } from "./AdminProdukEditService";
 import { IoIosAdd } from "react-icons/io";
 import { LoadingIcons } from "../../../components/Loading";
 import { Link } from "react-router-dom";
@@ -9,7 +9,7 @@ const AdminProdukPage = () =>{
     const [name, setName] = useState("");
     const [minPrice, setMinPrice] = useState(null);
     const [maxPrice, setMaxPrice] = useState(null);
-    const [isLoading, setLoading] = useState<Boolean>(false);
+    const [isLoading, setLoading] = useState(false);
 
     useEffect(()=>{
         setLoading(true);
@@ -33,7 +33,7 @@ const AdminProdukPage = () =>{
                         <input type="number" name="minPrice" placeholder="Minimal Harga" value={minPrice} onChange={(e)=>setMinPrice(e.target.value)} className="custom-input"/>
                         <input type="number" name="maxprice" placeholder="Maximal Harga" value={maxPrice} onChange={(e)=>setMaxPrice(e.target.value)} className="custom-input"/>
                         <input type="text" name="name" placeholder="Filter Nama" value={name} onChange={(e)=>setName(e.target.value)} className="custom-input"/>
-                        <Link className="btn btn-primary btn-icon" to={"add"}><IoIosAdd size={20}/> Tambah</Link>
+                        <button className="btn btn-primary btn-icon"><IoIosAdd size={20}/> Tambah</button>
                     </div>
                 </div>
                 <div className="admin-card-content">

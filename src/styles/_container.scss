@@ -37,8 +37,16 @@ body {
         margin: 5px 10px;
     }
 }
-@media (max-width: $mobile){
-    .login-container{
+.form-input{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 50%;
+    margin: auto;
+}
 
+@media (max-width: $mobile){
+    .form-input{
+        width: 100%;
     }
 }

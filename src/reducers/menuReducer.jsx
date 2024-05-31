@@ -1,18 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const userSlice = createSlice({
+const menuSlice = createSlice({
     name: 'menu',
     initialState:{
-        navbar:false
+        navbar:false,
+        loading:false
     },
     reducers:{
         openNavbar: (state)=>{
             state.navbar = true;
         },
         closeNavbar: (state)=>{
-            state.navbar = false
+            state.navbar = false;
+        },
+        openLoading: (state)=>{
+            state.loading = true;
+        },
+        closeLoading: (state)=>{
+            state.loading = false;
         }
     }
 })
 
-export default userSlice.reducer;
+export const {openLoading, closeLoading} = menuSlice.actions;
+export default menuSlice.reducer;

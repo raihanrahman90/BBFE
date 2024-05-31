@@ -1,22 +1,27 @@
 import { NavLink, Route, Routes } from "react-router-dom";
 import AdminDashboardPage from "./AdminDashboard/AdminDashboardPage";
 import { useSelector } from "react-redux";
-import AdminProdukPage from "./AdminProduk/AdminProdukPage";
+import AdminProdukListPage from "./AdminProduk/AdminProdukListPage";
 import { MdDashboard } from "react-icons/md";
 import { IoShirtOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa";
-import AdminProdukPageAdd from "./AdminProdukAdd/AdminProdukAddPage";
+import AdminProdukPageAdd from "./AdminProduk/AdminProdukAddPage";
+import { LoadingIcons } from "../../components/Loading";
+import AdminProdukEditPage from "./AdminProduk/AdminProdukEditPage";
 
 const AdminPage = () =>{
+    const {loading} = useSelector((state)=>state.menu);
     return (
         <div id="admin-container">
+            {loading?<LoadingIcons/>:<></>}
             <AdminSidebar/>
             <div className="flex-column">
                 <AdminHeader/>
                 <Routes>
-                    <Route path="" element={<AdminDashboardPage/>} />
-                    <Route path="produk" element={<AdminProdukPage/>}/>
-                    <Route path="produk/add" element={<AdminProdukPageAdd/>}/>
+                    <Route path="" element={<AdminDashboardPage/>}  exact/>
+                    <Route path="produk" element={<AdminProdukListPage/>} exact/>
+                    <Route path="produk/add" element={<AdminProdukPageAdd/>} exact/>
+                    <Route path="produk/:id" element={<AdminProdukEditPage/>} exact/> 
                 </Routes>
             </div>
         </div>

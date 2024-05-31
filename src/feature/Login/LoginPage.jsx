@@ -14,10 +14,11 @@ export const LoginPage = ()=>{
     const handleLoginEvent = (e)=>{
         e.preventDefault();
         let userCredentials = {
-            email, password
+            username:email, password:password
         };
         dispatch(loginUser(userCredentials)).then((result)=>{
-            if(result.payload){
+            if(result.payload.isSuccess){
+                console.log(result)
                 setEmail('')
                 setPassword('')
                 navigate('/admin')
@@ -28,13 +29,13 @@ export const LoginPage = ()=>{
     return (
         <div className="login-container">
             <form onSubmit={handleLoginEvent}>
-                <label className="title">Login</label>
+                <text className="title">Login</text>
                 {error?
                 <div></div>:<></>
                 }
                 <div className="form-group">
                     <label htmlFor="Email">Email</label>
-                    <input type="email" value = {email} onChange={(e)=>setEmail(e.target.value)}/>
+                    <input type="text" value = {email} onChange={(e)=>setEmail(e.target.value)}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="Password">Password</label>

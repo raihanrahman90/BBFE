@@ -1,25 +1,26 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getListPage } from "./AdminProdukService";
 import { IoIosAdd } from "react-icons/io";
 import { LoadingIcons } from "../../../components/Loading";
 import { Link } from "react-router-dom";
 
-const AdminProdukPage = () =>{
+const AdminProdukListPage = () =>{
     const [products, setProducts] = useState([]);
     const [name, setName] = useState("");
     const [minPrice, setMinPrice] = useState(null);
     const [maxPrice, setMaxPrice] = useState(null);
-    const [isLoading, setLoading] = useState<Boolean>(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [page, setPage] = useState(1);
 
     useEffect(()=>{
-        setLoading(true);
+        setIsLoading(true);
         getListPage(name, minPrice, maxPrice)
         .then((res)=>{
             setProducts(res.data);
-            setLoading(false)
+            setIsLoading(false)
         })
         .finally(()=>{
-            setLoading(false)
+            setIsLoading(false)
         })
     },[name, minPrice, maxPrice]);
     return (
@@ -57,7 +58,7 @@ const AdminProdukPage = () =>{
                                     <td>{0}</td>
                                     <td>{0}</td>
                                     <td>
-                                        <Link to={`/product/${item.id}`} className="btn btn-action btn-primary">Edit</Link>
+                                        <Link to={`${item.id}`} className="btn btn-action btn-primary">Edit</Link>
                                     </td>
                                 </tr>)
                             })}             
@@ -65,11 +66,10 @@ const AdminProdukPage = () =>{
                     </table>
                 </div>
                 <div className="admin-card-footer">
-
+                    
                 </div>
             </div>
         </section>
     )
 }
-
-export default AdminProdukPage;
+export default AdminProdukListPage;

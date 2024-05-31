@@ -1,13 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import axios from "axios"
 import {jwtDecode} from 'jwt-decode';
+import { postAPI } from "../utils/DefaultRequest";
 
 export const loginUser = createAsyncThunk(
     'user/loginUser',
     async(userCredential)=>{
-        const request = await axios.post('http://localhost:8000/api/auth/login', userCredential);
-        const response = await request.data;
-        return response;
+        try{
+            const response = await postAPI('auth/login', userCredential);
+            return response;
+        } catch(e){
+            return {};
+        }
+
     }
 );
 
@@ -41,18 +45,22 @@ const userSlice = createSlice({
             state.token = null;
         })
         .addCase(loginUser.fulfilled, (state, action)=>{
+            var data = action.payload;
             state.loading = false;
-            state.error = null;
-            state.user = action.payload.payload;
-            state.token = action.payload.accessToken;
-            localStorage.setItem("token", action.payload.accessToken);
-            localStorage.setItem("refreshToken", action.payload.refreshToken);
+            if(data.isSuccess){
+                state.error = null;
+                state.token = data.data.accessToken;
+                localStorage.setItem("token", data.data.accessToken);
+                localStorage.setItem("refreshToken", data.data.refreshToken);
+            }else{
+                state.error = action.message;
+            }
         })
         .addCase(loginUser.rejected, (state, action)=>{
+            console.log(state);
             state.loading = false;
             state.user = null;
             state.token = null;
-            console.log(action.error.message);
             if(action.error.message === 'Request failed with status code 401') {
                 state.error = 'access denied';
             };

@@ -1,4 +1,4 @@
-import { getAPI } from "../../../service/DefaultRequest"
+import { getAPI } from "../../../utils/DefaultRequest"
 
 export const getListPage=async(name, minPrice, maxPrice)=>{
     var url = `product?name=${name}`;

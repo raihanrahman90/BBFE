@@ -1,9 +1,13 @@
 
 const AdminDashboardPage = () =>{
     return (
-        <section>
-            <div className="admin-card w-100 h-100">
-                <div className="title">test</div>
+        <section className="content">
+            <div className="admin-card h-100 w-100">
+                <div className="admin-card-header">
+                    <div className="admin-title">
+                        <h2>Dashboard</h2>
+                    </div>
+                </div>
             </div>
         </section>
     )

@@ -4,7 +4,8 @@ const menuSlice = createSlice({
     name: 'menu',
     initialState:{
         navbar:false,
-        loading:false
+        loading:false,
+        sidebarMobile:false,
     },
     reducers:{
         openNavbar: (state)=>{
@@ -18,9 +19,15 @@ const menuSlice = createSlice({
         },
         closeLoading: (state)=>{
             state.loading = false;
+        },
+        openSidebarMobile:(state)=>{
+            state.sidebarMobile = true;
+        },
+        closeSidebarMobile: (state)=>{
+            state.sidebarMobile = false;
         }
     }
 })
 
-export const {openLoading, closeLoading} = menuSlice.actions;
+export const {openLoading, closeLoading, openSidebarMobile, closeSidebarMobile} = menuSlice.actions;
 export default menuSlice.reducer;

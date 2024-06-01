@@ -64,7 +64,7 @@ const AdminProdukPageAdd = () =>{
         <section className="content">
             <div className="admin-card h-100 w-100">
                 <div className="admin-card-header">
-                    <div>
+                    <div className="admin-title">
                         <h2>Produk</h2>
                     </div>
                 </div>

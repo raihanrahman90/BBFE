@@ -694,4 +694,8 @@
 .custom-input{
     height: 35px;
     margin: 5px 5px;
+    @media screen and (max-width:$mobile) {
+        width: 100%;
+    }
 }
+

@@ -29,7 +29,7 @@ export const LoginPage = ()=>{
     return (
         <div className="login-container">
             <form onSubmit={handleLoginEvent}>
-                <text className="title">Login</text>
+                <div className="title">Login</div>
                 {error?
                 <div></div>:<></>
                 }

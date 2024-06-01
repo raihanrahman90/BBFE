@@ -3,6 +3,7 @@ import { getListPage } from "./AdminProdukService";
 import { IoIosAdd } from "react-icons/io";
 import { LoadingIcons } from "../../../components/Loading";
 import { Link } from "react-router-dom";
+import { Pagination } from '../../../components/Pagination';
 
 const AdminProdukListPage = () =>{
     const [products, setProducts] = useState([]);
@@ -11,6 +12,7 @@ const AdminProdukListPage = () =>{
     const [maxPrice, setMaxPrice] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [page, setPage] = useState(1);
+    const [pageCount, setPageCount] = useState(1);
 
     useEffect(()=>{
         setIsLoading(true);
@@ -18,6 +20,7 @@ const AdminProdukListPage = () =>{
         .then((res)=>{
             setProducts(res.data);
             setIsLoading(false)
+            setPageCount(res.pageCount);
         })
         .finally(()=>{
             setIsLoading(false)
@@ -27,7 +30,7 @@ const AdminProdukListPage = () =>{
         <section className="content">
             <div className="admin-card h-100 w-100">
                 <div className="admin-card-header">
-                    <div>
+                    <div className="admin-title">
                         <h2>Produk</h2>
                     </div>
                     <div className="admin-button-container">
@@ -66,7 +69,7 @@ const AdminProdukListPage = () =>{
                     </table>
                 </div>
                 <div className="admin-card-footer">
-                    
+                    <Pagination page={page} setPage={setPage} pageCount={pageCount}/>
                 </div>
             </div>
         </section>

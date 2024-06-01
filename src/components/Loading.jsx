@@ -1,7 +1,7 @@
 const LoadingIcons = ()=>{
     return(
-        <div class="loading-container">
-        <div class="loading-icon">
+        <div className="loading-container">
+        <div className="loading-icon">
             <div></div>
             <div>
             <div>

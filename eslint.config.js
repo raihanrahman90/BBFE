@@ -4,7 +4,15 @@ import pluginReactConfig from "eslint-plugin-react/configs/recommended.js";
 
 
 export default [
-  {languageOptions: { globals: globals.browser }},
+  {
+    languageOptions: { 
+      globals: globals.browser
+    },
+    rules: {
+      "react/prop-types":"off",
+    },
+  },
   pluginJs.configs.recommended,
   pluginReactConfig,
+  
 ];

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { closeLoading, openLoading } from "../../../reducers/menuReducer";
+import { closeLoading, openLoading } from "../../../../reducers/menuReducer";
 import { useDispatch } from "react-redux";
-import { postAPI } from "../../../utils/DefaultRequest";
-import { fileToBase64 } from "../../../utils/FileUtils";
+import { postAPI } from "../../../../utils/DefaultRequest";
+import { fileToBase64 } from "../../../../utils/FileUtils";
 import { useNavigate } from "react-router-dom";
 
 const AdminProdukPageAdd = () =>{
@@ -10,7 +10,6 @@ const AdminProdukPageAdd = () =>{
     const navigate = useNavigate();
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [category, setCategory] = useState("")
     const [price, setPrice] = useState(0);
     const [image, setImage] = useState(null);
 
@@ -19,22 +18,25 @@ const AdminProdukPageAdd = () =>{
         fileToBase64(file, setImage);
     }
 
-    const submitProduct= (e)=>{
+    const submitProduct= async (e)=>{
         e.preventDefault();
-        dispatch(openLoading());
-        postAPI("/product", {
-            name:name,
-            description:description,
-            category:category,
-            price:price,
-            image: image
-        })
-        .then((res)=>{
+        try{
+            dispatch(openLoading());
+            let res = await postAPI("admin/item", {
+                name:name,
+                description:description,
+                price: parseInt(price),
+                image: image
+            })
             if(res.isSuccess){
                 navigate("/admin/produk");
+            }else{
+                alert("terjadi kesalahan")
             }
-            dispatch(closeLoading());
-        })
+        } catch(e) {
+            alert("Terjadi kesalahan")
+        }
+        dispatch(closeLoading());
     }
 
     return (
@@ -57,9 +59,6 @@ const AdminProdukPageAdd = () =>{
                         </div>
                         <div className="form-group">
                             <input type="text" placeholder="Deskripsi produk" onChange={(e)=>setDescription(e.target.value)}/>
-                        </div>
-                        <div className="form-group">
-                            <input type="text" placeholder="Kategori" onChange={(e)=>setCategory(e.target.value)}/>
                         </div>
                         <div className="form-group">
                             <input type="number" placeholder="Harga Produk" onChange={(e)=>setPrice(e.target.value)}/>

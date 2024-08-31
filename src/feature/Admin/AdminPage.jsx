@@ -1,21 +1,22 @@
 import { NavLink, Route, Routes } from "react-router-dom";
 import AdminDashboardPage from "./AdminDashboard/AdminDashboardPage";
 import { useDispatch, useSelector } from "react-redux";
-import AdminProdukListPage from "./AdminProduk/AdminProdukListPage";
+import AdminProdukListPage from "./AdminProduk/screen/AdminProdukListPage";
 import { MdDashboard } from "react-icons/md";
 import { IoShirtOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa";
-import AdminProdukPageAdd from "./AdminProduk/AdminProdukAddPage";
+import AdminProdukPageAdd from "./AdminProduk/screen/AdminProdukAddPage";
 import { LoadingIcons } from "../../components/Loading";
-import AdminProdukEditPage from "./AdminProduk/AdminProdukEditPage";
+import AdminProdukEditPage from "./AdminProduk/screen/AdminProdukEditPage";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { closeSidebarMobile, openSidebarMobile } from "../../reducers/menuReducer";
 
 const AdminPage = () =>{
-    const {loading} = useSelector((state)=>state.menu);
+    const {loading, modalDelete} = useSelector((state)=>state.menu);
     return (
         <div id="admin-container">
             {loading?<LoadingIcons/>:<></>}
+            {modalDelete?<DeleteConfirmationModal/>:<></>}
             <AdminSidebar/>
             <div className="flex-column">
                 <AdminHeader/>
@@ -33,9 +34,14 @@ const AdminPage = () =>{
 const AdminSidebar = () =>{
     return (
         <div id="admin-sidebar">
-            <NavLink end to="/admin" className="menu"><MdDashboard /> Dashboard</NavLink>
-            <NavLink to="/admin/produk" className="menu"><IoShirtOutline /> Produk</NavLink>
-            <NavLink to="/admin/user" className="menu"><FaRegUser /> User</NavLink>
+            <div className="admin-sidebar-upper-group">
+                <NavLink end to="/admin" className="menu"><MdDashboard /> Dashboard</NavLink>
+                <NavLink to="/admin/produk" className="menu"><IoShirtOutline /> Produk</NavLink>
+                <NavLink to="/admin/user" className="menu"><FaRegUser /> User</NavLink>
+            </div>
+            <div className="admin-sidebar-bottom-group">
+                <button className="menu">Logout</button>
+            </div>
         </div>
     )
 }

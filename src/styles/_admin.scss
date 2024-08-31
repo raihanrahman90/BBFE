@@ -19,7 +19,6 @@
     flex-direction: column;
     background-color: $white;
     border-radius: 15px;
-    overflow: scroll;
     .title{
         font-weight: 600;
     }
@@ -126,11 +125,17 @@
     box-shadow: $box-shadow;
     border-radius: 10px;
     padding: 50px 20px;
-
+    display: flex;
+    flex-direction: column;
+    .admin-sidebar-upper-group{
+        flex-grow: 1;
+    }
+    button{
+        border: none;
+    }
     .menu{
         color: $text-color;
         text-align: left;
-        display: block;
         text-decoration: none;
         padding: 5px 32px;
         margin:10px 0px;
@@ -139,10 +144,12 @@
         flex-direction: row;
         gap: 3px;
         line-height: 19px;
+        width: 100%;
+        background-color: transparent;
     }
     .menu.active,.menu:hover{
         background-color: $primary-color;
-        color: $text-color;
+        color: $white;
         box-shadow: $box-shadow;
     }
 }

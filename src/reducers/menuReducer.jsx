@@ -6,6 +6,10 @@ const menuSlice = createSlice({
         navbar:false,
         loading:false,
         sidebarMobile:false,
+        deleteModal:false,
+        deleteUrl:"",
+        deleteMessage:"",
+        refreshUrl:""
     },
     reducers:{
         openNavbar: (state)=>{
@@ -25,6 +29,16 @@ const menuSlice = createSlice({
         },
         closeSidebarMobile: (state)=>{
             state.sidebarMobile = false;
+        },
+        openDeleteModal: (state, action)=>{
+            state.deleteModal = true;
+            state.deleteUrl = action.deleteUrl;
+            state.refreshUrl = action.refreshUrl;
+        },
+        closeDeleteModal: (state) => {
+            state.deleteModal = false;
+            state.deleteUrl = "";
+            state.refreshUrl = "";
         }
     }
 })

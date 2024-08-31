@@ -44,3 +44,7 @@ export const putAPI = async(url, data)=>{
 export const postAPI=async(url, data)=>{
     return requestWithToken("post", url, data);
 }
+
+export const deleteAPI = async(url)=>{
+    return requestWithToken("delete", url,{});
+}

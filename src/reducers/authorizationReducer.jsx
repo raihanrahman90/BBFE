@@ -6,7 +6,7 @@ export const loginUser = createAsyncThunk(
     'user/loginUser',
     async(userCredential)=>{
         try{
-            const response = await postAPI('auth/login', userCredential);
+            const response = await postAPI('login', userCredential);
             return response;
         } catch(e){
             return {};
@@ -27,13 +27,22 @@ const userSlice = createSlice({
                 token: null
             };
         }else{
-            let user = jwtDecode(token);
-            return {
-                loading:false,
-                user:user,
-                error:null,
-                token:token
-            };
+            try{
+                let user = jwtDecode(token);
+                return {
+                    loading:false,
+                    user:user,
+                    error:null,
+                    token:token
+                };                    
+            } catch (e) {
+                return {
+                    loading:false,
+                    user: null,
+                    error: null,
+                    token: null
+                };
+            }
         }
     },
     extraReducers:(builder)=>{
@@ -45,12 +54,12 @@ const userSlice = createSlice({
             state.token = null;
         })
         .addCase(loginUser.fulfilled, (state, action)=>{
-            var data = action.payload;
+            let data = action.payload;
             state.loading = false;
             if(data.isSuccess){
                 state.error = null;
                 state.token = data.data.accessToken;
-                localStorage.setItem("token", data.data.accessToken);
+                localStorage.setItem("token", data.data.token);
                 localStorage.setItem("refreshToken", data.data.refreshToken);
             }else{
                 state.error = action.message;

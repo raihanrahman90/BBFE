@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getListPage } from "./AdminProdukService";
 import { IoIosAdd } from "react-icons/io";
-import { LoadingIcons } from "../../../components/Loading";
+import { LoadingIcons } from "../../../../components/Loading";
 import { Link } from "react-router-dom";
-import { Pagination } from '../../../components/Pagination';
+import { Pagination } from '../../../../components/Pagination';
+import { deleteAPI, getAPI } from "../../../../utils/DefaultRequest";
 
 const AdminProdukListPage = () =>{
     const [products, setProducts] = useState([]);
@@ -16,16 +16,40 @@ const AdminProdukListPage = () =>{
 
     useEffect(()=>{
         setIsLoading(true);
-        getListPage(name, minPrice, maxPrice)
-        .then((res)=>{
+        refresh();
+    },[name, minPrice, maxPrice]);
+
+    const refresh = async ()=>{
+        try{
+            let res = await getListPage(name, minPrice, maxPrice)
             setProducts(res.data);
             setIsLoading(false)
             setPageCount(res.pageCount);
-        })
-        .finally(()=>{
-            setIsLoading(false)
-        })
-    },[name, minPrice, maxPrice]);
+        }catch(e){
+            alert("terjadi kesalahan")
+        }
+        setIsLoading(false)
+    }
+
+    const deleteData = async (id) =>{
+        try{
+            setIsLoading(true);
+            deleteAPI(`admin/item/${id}`)    
+            await refresh();
+        } catch (e) {
+            alert("Terjadi kesalahan")
+        }
+        setIsLoading(false);
+    }
+
+    const getListPage=async(name, minPrice, maxPrice)=>{
+        let url = `/admin/item?`;
+        if(name!=null) url = `${url}&name=${name}`;
+        if(minPrice!=null) url = `${url}&minPrice=${minPrice}`;
+        if(maxPrice!=null) url = `${url}&maxPrice=${maxPrice}`;
+        return await getAPI(url);
+    }
+
     return (
         <section className="content">
             <div className="admin-card h-100 w-100">
@@ -61,7 +85,10 @@ const AdminProdukListPage = () =>{
                                     <td>{0}</td>
                                     <td>{0}</td>
                                     <td>
-                                        <Link to={`${item.id}`} className="btn btn-action btn-primary">Edit</Link>
+                                        <Link to={`${item.id}`}>
+                                            <button className="btn btn-action btn-primary">Edit</button>
+                                        </Link>
+                                        <button className="btn btn-action btn-red" onClick={()=>deleteData(item.id)}>Hapus</button>
                                     </td>
                                 </tr>)
                             })}             
